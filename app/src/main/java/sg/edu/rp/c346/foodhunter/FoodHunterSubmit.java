@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
+
 /**
  * Created by 15017381 on 13/11/2016.
  */
@@ -21,7 +23,7 @@ public class FoodHunterSubmit extends Activity{
 
     public static final int CAMERA_REQUEST = 10;
     private ImageView imgSpecimenPhoto;
-
+    private Bitmap bm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,14 +35,14 @@ public class FoodHunterSubmit extends Activity{
         btnSubmit = (Button) findViewById(R.id.buttonSubmit);
         imgSpecimenPhoto = (ImageView) findViewById(R.id.imageViewPhotos);
 
-        Intent i  = getIntent();
-        String name = i.getStringExtra("foodname");
-        String location = i.getStringExtra("foodlocation");
-        String description = i.getStringExtra("fooddescription");
-
-        etName.setText(name);
-        etLocation.setText(location);
-        etDescription.setText(description);
+//        Intent i  = getIntent();
+//        String name = i.getStringExtra("foodname");
+//        String location = i.getStringExtra("foodlocation");
+//        String description = i.getStringExtra("fooddescription");
+//
+//        etName.setText(name);
+//        etLocation.setText(location);
+//        etDescription.setText(description);
 
     }
 
@@ -49,10 +51,17 @@ public class FoodHunterSubmit extends Activity{
             String foodname = etName.getText().toString();
             String foodlocation = etLocation.getText().toString();
             String fooddescription = etDescription.getText().toString();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+
+
+
             Intent i  = new Intent();
             i.putExtra("foodname", foodname);
             i.putExtra("foodlocation", foodlocation);
             i.putExtra("fooddescription", fooddescription);
+            i.putExtra("image",byteArray);
             setResult(RESULT_OK, i);
             finish();
         }
@@ -70,6 +79,7 @@ public class FoodHunterSubmit extends Activity{
         if (resultCode == RESULT_OK) {
             if (requestCode == CAMERA_REQUEST) {
                 Bitmap cameraImage = (Bitmap) data.getExtras().get("data");
+                bm = cameraImage;
                 imgSpecimenPhoto.setImageBitmap(cameraImage);
             }
         }

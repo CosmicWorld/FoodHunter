@@ -10,12 +10,13 @@ public class Food {
     private String name;
     private String location;
     private String description;
-    private int img;
+    private Bitmap img;
 
-    public Food(String name, String location, String description){
+    public Food(String name, String location, String description, Bitmap img){
         this.name = name;
         this.location = location;
         this.description = description;
+        this.img = img;
     }
 
     public String getName() {
@@ -41,5 +42,9 @@ public class Food {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Bitmap getImg() { return img; }
+
+    public void setImg(Bitmap img) { this.img = img; }
 
 }

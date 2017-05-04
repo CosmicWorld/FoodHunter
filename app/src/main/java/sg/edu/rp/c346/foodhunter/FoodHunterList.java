@@ -3,6 +3,7 @@ package sg.edu.rp.c346.foodhunter;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -56,8 +57,10 @@ public class FoodHunterList extends Activity {
                     String foodname = data.getStringExtra("foodname");
                     String foodlocation = data.getStringExtra("foodlocation");
                     String fooddescription = data.getStringExtra("fooddescription");
+                    byte[] byteArray = getIntent().getByteArrayExtra("image");
+                    Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
-                    food.add(new Food(foodname, foodlocation, fooddescription));
+                    food.add(new Food(foodname, foodlocation, fooddescription, bmp));
                     adapter.notifyDataSetChanged();
                 }
                 break;

@@ -1,6 +1,7 @@
 package sg.edu.rp.c346.foodhunter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,11 +38,12 @@ public class FoodHunterListAdapter extends ArrayAdapter {
         TextView tvName = (TextView)rowView.findViewById(R.id.textViewNewName);
         TextView tvLocation = (TextView)rowView.findViewById(R.id.textViewNewLocation);
         TextView tvDescription = (TextView)rowView.findViewById(R.id.textViewNewDescription);
-        ImageView image = (ImageView)rowView.findViewById(R.id.imageViewNewImage);
+        ImageView image = (ImageView) rowView.findViewById(R.id.imageViewNewImage);
 
         tvName.setText(foodItem.getName());
         tvLocation.setText(foodItem.getLocation());
         tvDescription.setText(foodItem.getDescription());
+        image.setImageBitmap(foodItem.getImg());
 
         return rowView;
     }
