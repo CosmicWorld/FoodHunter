@@ -56,6 +56,7 @@ public class FoodHunterSubmit extends Activity{
             byte[] byteArray = stream.toByteArray();
 
 
+            //Delete this
 
             Intent i  = new Intent();
             i.putExtra("foodname", foodname);
