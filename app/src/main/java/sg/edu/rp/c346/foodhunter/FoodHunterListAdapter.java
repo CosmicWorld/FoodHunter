@@ -33,7 +33,7 @@ public class FoodHunterListAdapter extends ArrayAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Food foodItem = foodList.get(position);
         LayoutInflater inflater = (LayoutInflater) parent_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(layout_id, parent, false);
+        View rowView = inflater.inflate(R.layout.foodhunter_listadapter, parent, false);
 
         TextView tvName = (TextView)rowView.findViewById(R.id.textViewNewName);
         TextView tvLocation = (TextView)rowView.findViewById(R.id.textViewNewLocation);
@@ -43,7 +43,8 @@ public class FoodHunterListAdapter extends ArrayAdapter {
         tvName.setText(foodItem.getName());
         tvLocation.setText(foodItem.getLocation());
         tvDescription.setText(foodItem.getDescription());
-        image.setImageBitmap(foodItem.getImg());
+        image.setImageBitmap(Bitmap.createScaledBitmap(foodItem.getImg(), 720, 480, false));
+//        image.setImageBitmap(foodItem.getImg());
 
         return rowView;
     }

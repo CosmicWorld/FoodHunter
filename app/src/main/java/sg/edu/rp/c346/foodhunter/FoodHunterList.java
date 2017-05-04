@@ -51,19 +51,21 @@ public class FoodHunterList extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        switch(resultCode){
-            case RESULT_OK:
-                if(requestCode == 99) {
-                    String foodname = data.getStringExtra("foodname");
-                    String foodlocation = data.getStringExtra("foodlocation");
-                    String fooddescription = data.getStringExtra("fooddescription");
-                    byte[] byteArray = getIntent().getByteArrayExtra("image");
-                    Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
+        if(resultCode == RESULT_OK){
+            if (data != null) {
+                String foodname = data.getStringExtra("foodname");
+                String foodlocation = data.getStringExtra("foodlocation");
+                String fooddescription = data.getStringExtra("fooddescription");
+                byte[] test = data.getByteArrayExtra("image");
+                Bitmap bmp = BitmapFactory.decodeByteArray(test, 0, test.length);
+
+                if(requestCode == 99){
                     food.add(new Food(foodname, foodlocation, fooddescription, bmp));
                     adapter.notifyDataSetChanged();
                 }
-                break;
+
+            }
         }
     }
 }
